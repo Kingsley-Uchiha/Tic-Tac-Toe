@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+      <meta charset='utf-8'>
+      <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+      <title>Tic Tac Toe</title>
+      <meta name='viewport' content='width=device-width, initial-scale=1'>
+      <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+</head>
+
+<body>
+      <div class="game">
+            <div class="option"></div>
+            <div class="option"></div>
+            <div class="option"></div>
+            <div class="option"></div>
+            <div class="option"></div>
+            <div class="option"></div>
+            <div class="option"></div>
+            <div class="option"></div>
+            <div class="option"></div>
+      </div>
+      <div class="win off">
+            <h1>Player <span>X</span> Wins!</h1>
+            <button>Play Again <img src="./load.svg"></button>
+      </div>
+
+      <script>
+            const choice = document.querySelectorAll('.option');
+            const win = document.querySelector('.win h1 span');
+            const winBox = document.querySelector('.win');
+
+            const annouceWin = (winner) => {
+                  winBox.classList.remove('off');
+                  return winner == 'X' ? 'one' : 'two';
+            }
+            const checkDraw = () => {
+                  let cho = [];
+                  choice.forEach(c => {
+                        if (c.textContent) {
+                              cho.push(true);
+                        } else {
+                              cho.push(false);
+                        }
+                  })
+                  for (let i = 0; i < cho.length; i++) {
+                        if (cho[i] === false) {
+                              break;
+                        } else if (i === 8) {
+                              console.log('draw');
+                              winBox.innerHTML = "<h1>It's a draw</h1> <button>Play Again <img src='./load.svg'></button>";
+                              winBox.classList.remove('off');
+                        }
+                  }
+            }
+
+            let player = 'X';
+            choice.forEach(c => {
+                  c.addEventListener('click', e => {
+                        if (e.target.textContent === 'X' || e.target.textContent === 'O') {
+                              return;
+                        } else {
+                              e.target.textContent = player;
+                              if (player === 'X') {
+                                    player = 'O';
+                              } else {
+                                    player = 'X';
+                              }
+
+                              // * Check for X
+                              if (choice[0].textContent === choice[3].textContent && 
+                              choice[3].textContent === choice[6].textContent && choice[3].textContent) {
+                                    win.textContent = annouceWin(choice[3].textContent);
+                                    console.log('stop');
+                              } else if (choice[1].textContent === choice[4].textContent && 
+                              choice[4].textContent === choice[7].textContent && choice[4].textContent) {
+                                    win.textContent = annouceWin(choice[7].textContent);
+                                    console.log('stop');
+                              } else if (choice[2].textContent === choice[5].textContent && 
+                              choice[5].textContent === choice[8].textContent && choice[5].textContent) {
+                                    win.textContent = annouceWin(choice[5].textContent);
+                                    console.log('stop');
+                              } else if (choice[0].textContent === choice[1].textContent && 
+                              choice[1].textContent === choice[2].textContent && choice[1].textContent) {
+                                    win.textContent = annouceWin(choice[1].textContent);
+                                    console.log('stop');
+                              } else if (choice[3].textContent === choice[4].textContent && 
+                              choice[4].textContent === choice[5].textContent && choice[4].textContent) {
+                                    win.textContent = annouceWin(choice[4].textContent);
+                                    console.log('stop');
+                              } else if (choice[6].textContent === choice[7].textContent && 
+                              choice[7].textContent === choice[8].textContent && choice[7].textContent) {
+                                    win.textContent = annouceWin(choice[7].textContent);
+                                    console.log('stop');
+                              } else if (choice[0].textContent === choice[4].textContent && 
+                              choice[4].textContent === choice[8].textContent && choice[4].textContent) {
+                                    win.textContent = annouceWin(choice[4].textContent);
+                                    console.log('stop');
+                              } else if (choice[2].textContent === choice[4].textContent && 
+                              choice[4].textContent === choice[6].textContent && choice[4].textContent) {
+                                    win.textContent = annouceWin(choice[4].textContent);
+                                    console.log('stop');
+                              }else if (choice.forEach(c => c.textContent)) {
+                                    console.log('draw');
+                              } else {
+                                    checkDraw();
+                              }
+                        }
+                  })
+            })
+            winBox.addEventListener('click', e => {
+                  if (e.target.nodeName == 'BUTTON') {
+                        open(document.URL);
+                        close();
+                  }
+                  console.log(e.target);
+            })
+            console.log(choice);
+      </script>
+</body>
+
+</html>
